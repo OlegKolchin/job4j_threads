@@ -8,7 +8,7 @@ public class Wget {
                         System.out.println("Start loading ... ");
                         int n = 0;
                         while (n != 100) {
-                            String s = "\rLoading : " + n +"%";
+                            String s = "\rLoading : " + n + "%";
                             Thread.sleep(1000);
                             System.out.println(s);
                             n++;
