@@ -6,14 +6,11 @@ public class Wget {
                 () -> {
                     try {
                         System.out.println("Start loading ... ");
-                        int n = 0;
-                        while (n != 100) {
-                            String s = "\rLoading : " + n + "%";
+                        for (int i = 0; i < 100; i++) {
+                            String s = "\rLoading : " + i + "%";
                             Thread.sleep(1000);
-                            System.out.println(s);
-                            n++;
+                            System.out.print(s);
                         }
-
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
