@@ -20,7 +20,7 @@ public class UserStore {
     }
 
     public synchronized boolean delete(User user) {
-        return user != null && store.remove(user.getId()) != null;
+        return user != null && store.remove(user.getId(), user);
     }
 
     public synchronized boolean transfer(int fromId, int told, int amount) {
