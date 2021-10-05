@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.core.Is.is;
@@ -15,7 +13,7 @@ public class SimpleBlockingQueueTest {
 
     @Test
     public void defaultTest() throws InterruptedException {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(2);
         AtomicInteger i = new AtomicInteger(2);
         Thread producer = new Thread(() -> {
             try {
