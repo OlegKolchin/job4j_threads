@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -24,7 +23,7 @@ public class SimpleBlockingQueueTest {
                     queue.offer(i.getAndDecrement());
                 }
 
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
@@ -52,15 +51,19 @@ public class SimpleBlockingQueueTest {
 
     @Test
     public void whenFetchAllThenGetIt() throws InterruptedException {
+        AtomicInteger i = new AtomicInteger(0);
         final CopyOnWriteArrayList<Integer> buffer = new CopyOnWriteArrayList<>();
         final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
-        Thread producer = new Thread(
-                () -> {
-                    IntStream.range(0, 5).forEach(
-                            queue::offer
-                    );
+        Thread producer = new Thread(() -> {
+            try {
+                while (i.intValue() < 5) {
+                    queue.offer(i.getAndIncrement());
                 }
-        );
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
         producer.start();
         Thread consumer = new Thread(
                 () -> {
@@ -81,3 +84,4 @@ public class SimpleBlockingQueueTest {
         assertThat(buffer, is(Arrays.asList(0, 1, 2, 3, 4)));
     }
 }
+
