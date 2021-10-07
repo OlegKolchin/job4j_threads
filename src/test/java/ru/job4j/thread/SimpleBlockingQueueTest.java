@@ -59,7 +59,6 @@ public class SimpleBlockingQueueTest {
                 while (i.intValue() < 5) {
                     queue.offer(i.getAndIncrement());
                 }
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
