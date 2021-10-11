@@ -28,14 +28,14 @@ public class ParallelSearch extends RecursiveTask<Integer> {
         rightSearch.fork();
         int left =  leftSearch.join();
         int right = rightSearch.join();
-        return left != -1 ? left : right;
+        return Math.max(left, right);
     }
 
     private int search() {
         if (start < 0 || end < 0 || start > end) {
             throw new IllegalArgumentException();
         }
-        for (int i = start; i < end; i++) {
+        for (int i = start; i <= end; i++) {
             if (array[i] == value) {
                 return i;
             }
