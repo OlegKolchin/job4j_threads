@@ -36,7 +36,7 @@ public class RolColSum {
         return rsl;
     }
 
-    public static int sumRow(int row, int[][] matrix) {
+    private static int sumRow(int row, int[][] matrix) {
         int rsl = 0;
         for (int i = 0; i < matrix.length; i++) {
             rsl += matrix[row][i];
@@ -44,7 +44,7 @@ public class RolColSum {
         return rsl;
     }
 
-    public static int sumCol(int col, int[][] matrix) {
+    private static int sumCol(int col, int[][] matrix) {
         int rsl = 0;
         for (int i = 0; i < matrix.length; i++) {
             rsl += matrix[i][col];
@@ -52,27 +52,15 @@ public class RolColSum {
         return rsl;
     }
 
-    public static CompletableFuture<Integer> asyncSumRow(int row, int[][] matrix) {
+    private static CompletableFuture<Integer> asyncSumRow(int row, int[][] matrix) {
         return CompletableFuture.supplyAsync(
-                () -> {
-                    int rsl = 0;
-                    for (int i = 0; i < matrix.length; i++) {
-                        rsl += matrix[row][i];
-                    }
-                    return rsl;
-                }
+                () -> sumRow(row, matrix)
         );
     }
 
-    public static CompletableFuture<Integer> asyncSumCol(int col, int[][] matrix) {
+    private static CompletableFuture<Integer> asyncSumCol(int col, int[][] matrix) {
         return CompletableFuture.supplyAsync(
-                () -> {
-                    int rsl = 0;
-                    for (int i = 0; i < matrix.length; i++) {
-                        rsl += matrix[i][col];
-                    }
-                    return rsl;
-                }
+                () -> sumCol(col, matrix)
         );
     }
 
