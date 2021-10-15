@@ -1,4 +1,4 @@
-package ru.job4j.pool;
+package ru.job4j.pools;
 
 public class User {
     private String username;
