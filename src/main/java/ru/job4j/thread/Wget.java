@@ -48,5 +48,6 @@ public class Wget implements Runnable {
         Thread wget = new Thread(new Wget(url, speed, "temp.xml"));
         wget.start();
         wget.join();
+        System.out.println("");
     }
 }
